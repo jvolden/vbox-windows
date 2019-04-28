@@ -330,6 +330,14 @@ Now we compile VBox:
     3. Failed again with permission errors. Reset security settings on source folder. Try and download a clean copy not using svn?
     4. Ignore Compile Warning C4946 [Link](https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-1-c4946?view=vs-2019)
 
+At this point I was still getting compiler errors and numerous permission denied errors. I re-extracted the 6.0.4 again and patched.
+
+----
+
+### April 28, 2019
+
+Reran the 64bit compilation. Unchecking any folder that gave permission denied errors until it finished.
+
   * Compile the 32 bit version:
     ``` powershell
     cd /d C:\Devel\VirtualBox-src
@@ -341,6 +349,8 @@ Now we compile VBox:
     kmk
     kmk C:/Devel/VirtualBox-src/out/win.x86/release/bin/VirtualBox-6.0.4_OSE-r128164-MultiArch.exe
     ```
+    Compile notes:
+    1. The 32bit version also had number permission denied errors. But not as many as the 64bit.
 
     We now have the installer in `out/win.x86/release/bin/`.
 
