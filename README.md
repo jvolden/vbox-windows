@@ -1,6 +1,6 @@
 # Compiling Virtualbox on Windows
 
-## Attempt #2 Log
+## Attempt #2 Log (Success!)
 
 Entire process was copied from [CaptainFlint's blog post](https://habr.com/en/post/447300/)
 
