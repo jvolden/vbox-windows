@@ -4,7 +4,7 @@
 
 Entire process was copied from [CaptainFlint's blog post](https://habr.com/en/post/447300/)
 
-The following is just a log of what I was able to get completed.
+~~The following is just a log of what I was able to get completed.~~
 
 ----
 
