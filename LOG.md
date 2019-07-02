@@ -1,24 +1,39 @@
 # VirtualBox Project Log
 
-- [VirtualBox Project Log](#virtualbox-project-log)
-  - [Pre-Task](#pre-task)
-  - [Tasks for VirtualBox](#tasks-for-virtualbox)
-    - [April 23](#april-23)
-    - [April 24](#april-24)
-    - [April 26](#april-26)
-    - [April 27](#april-27)
-    - [April 28](#april-28)
-    - [May 24](#may-24)
-    - [May 28](#may-28)
-    - [May 29](#may-29)
-    - [May 30](#may-30)
-    - [May 31](#may-31)
-    - [June 3](#june-3)
-    - [June 4](#june-4)
-    - [June 5](#june-5)
-    - [June 6](#june-6)
-    - [June 7](#june-7)
-    - [June 11](#june-11)
+- [VirtualBox Project Log](#VirtualBox-Project-Log)
+  - [Pre-Task](#Pre-Task)
+  - [Tasks for VirtualBox](#Tasks-for-VirtualBox)
+    - [April 23](#April-23)
+    - [April 24](#April-24)
+    - [April 26](#April-26)
+    - [April 27](#April-27)
+    - [April 28](#April-28)
+    - [May 24](#May-24)
+    - [May 28](#May-28)
+    - [May 29](#May-29)
+    - [May 30](#May-30)
+    - [May 31](#May-31)
+    - [June 3](#June-3)
+    - [June 4](#June-4)
+    - [June 5](#June-5)
+    - [June 6](#June-6)
+    - [June 7](#June-7)
+    - [June 11](#June-11)
+    - [June 12](#June-12)
+    - [June 13](#June-13)
+    - [June 14](#June-14)
+    - [June 17](#June-17)
+    - [June 18](#June-18)
+    - [June 19](#June-19)
+    - [June 20](#June-20)
+    - [June 21](#June-21)
+    - [June 24](#June-24)
+    - [June 25](#June-25)
+    - [June 26](#June-26)
+    - [June 27](#June-27)
+    - [June 28](#June-28)
+    - [July 1](#July-1)
+    - [July 2](#July-2)
 
 ## Pre-Task
 
@@ -188,4 +203,170 @@ _Crypt_HashFile(file, algorithm)
 Check vboxdrv.sys file, if they are different, exit or overwrite. (Need admin)
 
 ### June 11
+
+Edit autoit script to leave drivers installed if we installed them on the system.
+
+Break script into modules.
+
+__Lots of refactoring__
+
+Create standalone exe. Put vbox.exe installer on drive?
+
+### June 12
+
+Update usb stick with latest files.
+
+user/pass: ku/ku1234 test machine
+
+Can't move from one machine to another during a save state/snapshot. Normal behavior?
+
+Using official release 6.0.4+:
+  We don't need to sign drivers
+  We don't need admin access
+
+Determine DLLs needed for virtual box at a minimum.
+
+Make resolutions match automaticly to host machine
+
+Xen?
+
+### June 13
+
+Remove hybrid mode. Portable-virtualbox runs files off host machine and exits if they are already install. We need to verify files to ensure our machine works with their drivers.
+
+Hybrid mode forgets portable-virtualbox settings like automaticly starting a machine if set in settings.
+
+Added debug window to portable-virtualbox. Finished some refactoring and uploaded/forked git.
+
+[Portable-Virtualbox](https://github.com/jvolden/portable-virtualbox)
+
+_Unfinished: Needs to be updated_
+
+Moved to QEMU with hypervisor?
+
+Meeting with Matt.
+
+Waiting for contact at library to finish fleshing out specs for host/guest machine settings.
+
+Features? Browser Security. Brave?
+
+Update goals?
+
+### June 14
+
+Finish implementing debug logging.
+
+Lots of code/refactoring.
+
+### June 17
+
+Testing on different machines at home.
+
+### June 18
+
+Started native builds of QEMU for windows on windows 10 using msys2 with WHPX enabled.
+
+Same install speed at pre-build binaries. Too slow.
+
+### June 19
+
+Install/create windows isntall on virtualbox and convert it to qcow for qemu
+
+`> qemu-img convert windows10.img -O qcow2 qemu\windows10.img`
+
+Won't boot to Windows completely. Freezes after 20 min
+
+Doesn't work on mobile intel processors? [todo]
+
+Runs on desktops with `ok`(?) speed compared to Virtualbox.
+
+autoit function to build usable command on windows.
+
+```AutoIt
+Func _Run_Command()
+  Local $command 
+  $command &= $G_QEMUEXE
+  $command &= " -hda " & $G_WINDOWSIMG
+  $command &= " -boot d"
+  $command &= " -usb -device usb-tablet"
+  $command &= " -accel whpx"
+  $command &= " -machine q35"
+  $command &= " -cpu qemu64"
+  $command &= " -m 3G"
+  $command &= " -full-screen"
+  Return $command
+EndFunc
+```
+
+Still can't savevm. No possible? Prevents portability conflicts between hosts?
+
+### June 20
+
+Have test windows machine installed.
+
+Runs fairly slow with 6G memory.
+
+Start looking at cpu flags for savevm?
+
+### June 21
+
+Explorer ways to speed up windows 10 default installation.
+
+Debloat/updates?
+
+Reinstalling Windows 10 with newest updates. Takes too long to update manually.
+
+Disable windows updates?
+
+### June 24
+
+Create bench setup with puppylinux.
+
+Switched to archlinux.
+
+Using linux bench scripts.
+
+`wget -qO- bench.sh | bash`
+
+[haydenjames](https://github.com/haydenjames/bench-scripts)
+
+### June 25
+
+Goals:  
+- [ ] Hotswappable
+- [ ] Auto-run (installable exe?)
+
+Begin autoit script to check host system for QEMU to run.
+
+Check for:
+
+* CPU
+* Memory
+* Hypervisor
+* Network
+* USB Speed?
+
+### June 26
+
+Work on autoit to determine USB capabilities
+
+Windows doesn't report directly USB protocols supported by inserted device.
+
+### June 27
+
+Switch to c++/# to use native win api to query usb devices?
+
+### June 28
+
+Shelving USB query for now. Use a more brute force test to determine speed?
+
+File reads/writes speeds, maybe doesn't need to be 3.0?
+
+### July 1
+
+Return to finishing autoit script for qemu.
+
+Added loading/splash screen. More/less info for user?
+
+### July 2
 
